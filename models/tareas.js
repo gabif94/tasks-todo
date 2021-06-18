@@ -17,10 +17,28 @@ class Tareas {
 		this._listado = {};
 	}
 
+	cargarTareasFromArray(tareas = []) {
+		tareas.forEach(tarea => {
+			this._listado[tarea.id] = tarea;
+		});
+	}
+
 	crearTarea(descripcion = '') {
 		const tarea = new Tarea(descripcion);
 
 		this._listado[tarea.id] = tarea;
+	}
+
+	listadoCompleto() {
+		console.log();
+		this.listadoArr.forEach((tarea, i) => {
+			const idx = `${i + 1}`.green;
+			const {desc, completadoEn} = tarea;
+
+			const estado = completadoEn ? 'Completada'.green : 'Pendiente'.red;
+
+			console.log(`${idx} ${desc} :: ${estado}`);
+		});
 	}
 }
 
